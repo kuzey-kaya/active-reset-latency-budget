@@ -1,0 +1,9 @@
+# Exact versions used for the results reported in the manuscript.
+# Replace the version numbers below with your own, obtained by running:
+#     pip freeze | grep -i -E "qutip|numpy|scipy|matplotlib"
+# The reviewers asked for exact package versions, so pinned "==" is required,
+# not a bare package name.
+qutip==5.3.0
+numpy==2.1.0
+scipy==1.14.0
+matplotlib==3.9.0

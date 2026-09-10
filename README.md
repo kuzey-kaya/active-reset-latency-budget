@@ -1,0 +1,58 @@
+# A Closed-Form Excess-Population Latency Budget for Active Reset of Superconducting Qubits
+
+Simulation and analysis code accompanying the manuscript of the same title.
+
+**Author:** Kuzey Kaya, Sanko Private Science and Technology High School, Gaziantep, Türkiye
+**ORCID:** [0009-0003-6608-7620](https://orcid.org/0009-0003-6608-7620)
+
+The paper derives, in closed form, the residual excited-state population of a
+latency-limited measurement-based reset of a superconducting transmon, and the critical
+feedback latency at which that population rises above its zero-latency value by a chosen
+error budget. To leading order the result is a design rule: the tolerable latency is the
+error budget multiplied by T₁ and divided by the pulse-firing probability.
+
+Every number and every figure in the manuscript is produced by the scripts below.
+
+## Contents
+
+| File | What it produces |
+|---|---|
+| `revision_calculations.py` | The full set of results: exact affine pulse propagator, the threshold existence condition, the results table, the asymmetric confusion matrix, the initial-population sensitivity, and Figure 3. Requires only NumPy, SciPy and Matplotlib. |
+| `closed_form_conditioned.py` | The closed-form solution of Sec. II.E (Eqs. 11–16), the analytic critical latency, Figure 2 and the (τ, P_AE) grid. No QuTiP needed. |
+| `realistic_case_EXACT.py` | Exact four-branch master-equation evaluation of Eq. (8) with QuTiP `mesolve`, and its comparison against the closed form. |
+| `figure1_zero_error_check_FIXED.py` | Zero-error validation and Figure 1: QuTiP `mcsolve`, 20,000 trajectories, plus the 12-ensemble uncertainty estimate quoted in Sec. II.D. |
+| `trajectory_sim_FIXED.py` | Stochastic-trajectory cross-check with QuTiP `smesolve` at P_AE = 0.5 (see the docstring for why that value is used). |
+| `make_figures.py` | Regenerates Figures 2 and 3 with the published hardware latencies marked. |
+| `fig2_grid_conditioned.csv` | The Figure 2 data. |
+| `Figure1_ZeroError_Validation.png`, `Figure2_conditioned.png`, `Figure3_design_rule.png` | The figures as they appear in the manuscript. |
+
+## Running
+
+```bash
+pip install -r requirements.txt
+python revision_calculations.py        # no QuTiP required
+python closed_form_conditioned.py      # no QuTiP required
+python realistic_case_EXACT.py         # QuTiP
+python figure1_zero_error_check_FIXED.py   # QuTiP, a few minutes
+python trajectory_sim_FIXED.py         # QuTiP, a few minutes
+```
+
+## Reproducibility
+
+All trajectory seeds are fixed explicitly in the scripts, so rerunning reproduces every
+figure and every quoted ensemble exactly. Note that QuTiP 5's stochastic and Monte Carlo
+solvers take their seed through the `seeds=` argument; `numpy.random.seed()` does not
+control them.
+
+Solver settings: `mesolve` runs at default tolerances; `smesolve` uses a fixed integration
+step of 0.02 ns, which is fifty steps per inverse measurement rate. Halving that step to
+0.01 ns changes the cross-check sample mean by less than a third of its standard error, so
+the comparison is converged in the integration step.
+
+Model parameters throughout: T₁ = 50 μs, n_th = 0.01, T_φ = 100 μs, t_read = 300 ns,
+t_pulse = 20 ns, t_eval = 1500 ns.
+
+## Citation
+
+If you use this code, please cite the manuscript and this archive. The archive DOI is
+minted by Zenodo on release.
