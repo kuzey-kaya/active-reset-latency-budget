@@ -58,7 +58,7 @@ The two stochastic cross-checks differ in what they sample. `trajectory_sim_FIXE
 samples both the readout trajectory and the assignment outcome, which is why it is run at
 P_AE = 0.5, where neither branch is rare. `stochastic_verification_stratified.py` integrates
 the assignment channel out analytically — its probabilities are known exactly — and samples
-only the readout trajectory, which reduces the variance by about 4 × 10⁴ at the same 300
+only the readout trajectory, which reduces the variance by a factor of 1 × 10⁵ to 7 × 10⁵ across the grid at the same 300
 trajectories and makes the test usable at realistic P_AE and nonzero delay. Its output
 separates three contributions to the difference from the closed form: the within-ensemble
 standard error, the binomial uncertainty of the sampled projected fraction, and the finite
