@@ -1,17 +1,28 @@
-# A Closed-Form Excess-Population Latency Budget for Active Reset of Superconducting Qubits
+# Latency limits of active reset in superconducting qubits
 
-Simulation and analysis code accompanying the manuscript of the same title.
+Simulation and analysis code for the manuscript *Latency limits of active reset in superconducting
+qubits: readout contrast, residual photons and leakage* (submitted to Physica Scripta, 2026), and for
+its earlier preprint version, *A Closed-Form Excess-Population Latency Budget for Active Reset of
+Superconducting Qubits* (Zenodo, doi:10.5281/zenodo.23295225).
 
-**Author:** Kuzey Kaya, Sanko Private Science and Technology High School, Gaziantep, Türkiye
+**Author:** Kuzey Kaya, Independent researcher, Gaziantep, Türkiye
 **ORCID:** [0009-0003-6608-7620](https://orcid.org/0009-0003-6608-7620)
 
-The paper derives, in closed form, the residual excited-state population of a
-latency-limited measurement-based reset of a superconducting transmon, and the critical
-feedback latency at which that population rises above its zero-latency value by a chosen
-error budget. To leading order the result is a design rule: the tolerable latency is the
-error budget multiplied by T₁ and divided by the pulse-firing probability.
+## Version 1.2 (revised manuscript)
 
-Every number and every figure in the manuscript is produced by the scripts below.
+The revised manuscript evaluates the reset error at the end of the pulse slot (the moment the next
+operation can start). The error added by a feedback delay τ is then q(1 − e^(−Γ₁τ)), with a latency
+coefficient q set by the readout contrast P_e(1 − 2ε). Including the readout resonator, residual
+photons bound the delay from below and relaxation from above, giving a window of admissible delays
+and an optimal delay. The scripts for these results are listed in `NEW_SCRIPTS.md`; run
+`paper_numbers.py`, then `make_figures_v2.py`, then `window_edges.py` to reproduce every number,
+table and figure of the revised manuscript.
+
+## Version 1.1 and earlier (preprint)
+
+The scripts below reproduce the preprint, which used a fixed evaluation clock t_eval. In that
+convention the leading-order rule is: tolerable latency = error budget × T₁ / pulse-firing
+probability. The revised manuscript keeps this result as its fixed-slot appendix.
 
 ## Contents
 
